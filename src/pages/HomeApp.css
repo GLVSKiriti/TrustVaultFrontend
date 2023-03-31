@@ -1,4 +1,8 @@
 body {
+  margin: 0;
+}
+
+.page {
   background: linear-gradient(
     251.85deg,
     #045de9 -6.47%,
@@ -12,7 +16,7 @@ body {
   height: 100vh;
 }
 
-#root {
+.page {
   color: white;
   font-family: "McLaren", cursive;
 }
