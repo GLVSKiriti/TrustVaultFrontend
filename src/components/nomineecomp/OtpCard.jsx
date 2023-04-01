@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function OtpCard() {
   const urlParams = new URLSearchParams(window.location.search);
   const v_id = urlParams.get("v_id");
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [clicked, setClicked] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+
   const verifyEmail = async () => {
     // console.log(email);
     try {
@@ -52,15 +54,13 @@ function OtpCard() {
       );
 
       const { message, description } = res.data;
-
       setMessage(message);
       console.log(description);
+      navigate(`/nominee/vault?v_id=${v_id}`, { state: description });
       setOtp("");
     } catch (error) {
       setError(error);
     }
-    // console.log(otp);
-    // setClicked(false);
   };
   return (
     <div className="otpcard">

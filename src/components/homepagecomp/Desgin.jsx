@@ -27,7 +27,7 @@ function Design() {
           //       value: "#0d47a1",
           //     },
           //   },
-          fpsLimit: 60,
+          fpsLimit: 30,
           interactivity: {
             events: {
               onClick: {
@@ -58,7 +58,7 @@ function Design() {
               color: "#ffffff",
               distance: 150,
               enable: true,
-              opacity: 0.6,
+              opacity: 0.25,
               width: 1,
             },
             collisions: {
@@ -88,7 +88,7 @@ function Design() {
               type: "circle",
             },
             size: {
-              value: { min: 1, max: 3 },
+              value: { min: 3, max: 4 },
             },
           },
           detectRetina: true,

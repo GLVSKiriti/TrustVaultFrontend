@@ -2,6 +2,7 @@ import React from "react";
 import HomeApp from "./pages/HomeApp";
 import { Route, Routes } from "react-router-dom";
 import OtpSentForNom from "./pages/OtpSentForNom";
+import VaultDataForNom from "./pages/VaultDataForNom";
 
 function App() {
   // return <HomeApp />;
@@ -9,6 +10,7 @@ function App() {
     <Routes>
       <Route path="/" element={<HomeApp />} />
       <Route path="/nominee/otp" element={<OtpSentForNom />} />
+      <Route path="/nominee/vault" element={<VaultDataForNom />} />
     </Routes>
   );
 }

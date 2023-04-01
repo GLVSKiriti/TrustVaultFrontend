@@ -18,6 +18,9 @@ body {
   /* background-image: url("https://transparenttextures.com/patterns/crissxcross.png"); */
 
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .header {
@@ -57,10 +60,10 @@ body {
 .otpcard {
   background-color: #045de9;
   background-color: white;
-  height: 20em;
+  min-height: 20em;
   width: 35em;
   margin-top: 10em;
-  margin-left: 27.5em;
+  margin-left: 30.5em;
   border: 1px solid black;
   box-shadow: 2px 4px 15px black;
   border-radius: 15px;
