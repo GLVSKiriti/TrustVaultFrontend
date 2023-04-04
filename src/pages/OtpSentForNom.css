@@ -54,7 +54,7 @@ body {
 .design {
   position: absolute;
   height: 12vh;
-  z-index: +1;
+  /* z-index: +1; */
 }
 
 .otpcard {

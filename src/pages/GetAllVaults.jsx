@@ -4,10 +4,12 @@ import Header from "../components/nomineecomp/Header";
 import Vaultcard from "../components/getallvaultscomp/Vaultcard";
 import "./GetAllVaults.css";
 import addbutton from "../assets/plus.png";
+import { useNavigate } from "react-router-dom";
 
 function GetAllVaults() {
   const [vaults, setVaults] = useState([]);
   const [isClick, setClick] = useState(true);
+  const navigate = useNavigate();
 
   const fetchmyapi = async () => {
     const token = localStorage.getItem("jwt");
@@ -41,7 +43,12 @@ function GetAllVaults() {
               />
             );
           })}
-          <div className="vaultcard add">
+          <div
+            className="vaultcard add"
+            onClick={() => {
+              navigate("/addVault");
+            }}
+          >
             <img src={addbutton} alt="" />
           </div>
         </div>
