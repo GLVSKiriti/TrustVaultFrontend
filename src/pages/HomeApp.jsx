@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Title from "../components/homepagecomp/Title";
 import Cover from "../components/homepagecomp/Cover";
 import Caption from "../components/homepagecomp/Caption";
 import ThreeDcard from "../components/homepagecomp/ThreeDcard";
 import Design from "../components/homepagecomp/Desgin";
 import "./HomeApp.css";
+import { useNavigate } from "react-router-dom";
 
 function HomeApp() {
   //No need of div here
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      navigate("/getAllVaults");
+    }
+  }, []);
+
   return (
     <div className="page">
       <Title />
