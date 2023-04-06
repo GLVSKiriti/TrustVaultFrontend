@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 function HomeApp() {
   //No need of div here
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
+    const token = sessionStorage.getItem("jwt");
     if (token) {
       navigate("/getAllVaults");
     }

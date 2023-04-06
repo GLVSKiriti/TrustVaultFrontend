@@ -3,10 +3,40 @@ import vaultlogo from "../../assets/vault.png";
 import usernamelogo from "../../assets/username.png";
 import deletelogo from "../../assets/icons8-delete.svg";
 import DropDownItem from "./DropDownItem";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import DisResContext from "../displayvaultcomp/DisResContext";
+import { useContext } from "react";
 
 function Vaultcard(props) {
   const [isclicked, setClicked] = useState(false);
   let vnamecalss = "vaultname";
+  const navigate = useNavigate();
+
+  const { dispRes1, setDispRes } = useContext(DisResContext);
+
+  const displayVaultfunc = async () => {
+    const token = sessionStorage.getItem("jwt");
+    const vsk = prompt("Enter the Vault Secret Key");
+    const res = await axios.post(
+      "http://localhost:4000/vault/displayVault",
+      {
+        vId: props.v_id,
+        vaultSecretKey: vsk,
+      },
+      {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    setDispRes(res.data);
+    // console.log(dispRes1);
+    if (dispRes1 !== {}) {
+      navigate("/displayVault");
+    }
+  };
 
   if (props.ind % 3 === 1) {
     vnamecalss = "vaultname one";
@@ -23,10 +53,22 @@ function Vaultcard(props) {
         onMouseOver={() => setClicked(true)}
         onMouseLeave={() => setClicked(false)}
       >
-        <div className="vaultcard">
+        <div
+          className="vaultcard"
+          onClick={() => {
+            displayVaultfunc();
+          }}
+        >
           <img src={vaultlogo} alt="" />
         </div>
-        <span className={vnamecalss}>{props.content}</span>
+        <span
+          className={vnamecalss}
+          onClick={() => {
+            displayVaultfunc();
+          }}
+        >
+          {props.content}
+        </span>
         {isclicked ? (
           <div className="dropdownmenu">
             <ul>

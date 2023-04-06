@@ -8,11 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 function GetAllVaults() {
   const [vaults, setVaults] = useState([]);
-  const [isClick, setClick] = useState(true);
+  // const [isClick, setClick] = useState(true);
   const navigate = useNavigate();
 
   const fetchmyapi = async () => {
-    const token = localStorage.getItem("jwt");
+    const token = sessionStorage.getItem("jwt");
     const res = await axios.get("http://localhost:4000/vault/getAllVaults", {
       headers: {
         Authorization: token,
@@ -24,7 +24,7 @@ function GetAllVaults() {
 
   useEffect(() => {
     fetchmyapi();
-  }, [vaults]);
+  }, []);
 
   //   const filterdata = res.data.filterData;
   return (

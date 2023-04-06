@@ -34,7 +34,7 @@ function AddVault() {
   }
 
   const addVaultAPI = async () => {
-    const token = localStorage.getItem("jwt");
+    const token = sessionStorage.getItem("jwt");
     console.log(token);
     const res = await axios.post(
       "http://localhost:4000/vault/addVault",

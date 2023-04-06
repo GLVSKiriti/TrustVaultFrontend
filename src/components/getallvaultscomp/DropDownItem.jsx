@@ -7,7 +7,7 @@ function DropDownItem(props) {
 
   const deleteVault = async () => {
     const password = prompt("Enter password");
-    const token = localStorage.getItem("jwt");
+    const token = sessionStorage.getItem("jwt");
     const res = await axios.delete(
       `http://localhost:4000/vault/deleteVault/${props.v_id}`,
       {

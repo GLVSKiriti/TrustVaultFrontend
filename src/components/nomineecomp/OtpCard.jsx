@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function OtpCard() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -21,7 +21,7 @@ function OtpCard() {
       const { token, message } = res.data;
       console.log(token);
       if (token) {
-        localStorage.setItem("jwt", token);
+        sessionStorage.setItem("jwt", token);
       } else {
         setError("Something Went Wrong!!Try again later");
       }
@@ -38,7 +38,7 @@ function OtpCard() {
     try {
       console.log(otp);
       console.log(v_id);
-      const token = localStorage.getItem("jwt");
+      const token = sessionStorage.getItem("jwt");
       const res = await axios.post(
         "http://localhost:4000/nominee/otpverify",
         {

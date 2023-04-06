@@ -51,6 +51,26 @@ body {
   width: 100%;
 }
 
+.dropdownmenutwo {
+  position: absolute;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  border: 1px solid black;
+}
+
+.dropdownmenutwo > div {
+  background: white;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.dropdownmenutwo > div:hover {
+  background: black;
+  color: white;
+}
+
 .design {
   position: absolute;
   height: 12vh;

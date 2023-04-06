@@ -17,7 +17,7 @@ function Login(props) {
 
     const { message, token } = res.data;
     if (token) {
-      localStorage.setItem("jwt", token);
+      sessionStorage.setItem("jwt", token);
       navigate("/getAllVaults");
     } else {
       alert("Sign In Again");
