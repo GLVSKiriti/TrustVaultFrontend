@@ -19,13 +19,16 @@ function SignUp(props) {
         email: email,
         password: password,
       });
-
-      const { message, token } = res.data;
-      if (token) {
-        sessionStorage.setItem("jwt", token);
-        navigate("/getAllVaults");
+      if (res.data.error) {
+        alert("User Already exists");
       } else {
-        alert("Sign Up Again");
+        const { message, token } = res.data;
+        if (token) {
+          sessionStorage.setItem("jwt", token);
+          navigate("/getAllVaults");
+        } else {
+          alert("Sign Up Again");
+        }
       }
     } else {
       alert("Password Mismatched");
