@@ -56,6 +56,7 @@ function Login(props) {
             event.preventDefault();
             loginfunc();
           }}
+          disabled={!email || !password}
         >
           Login
         </button>
