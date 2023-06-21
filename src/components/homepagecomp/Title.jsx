@@ -3,7 +3,7 @@ import logo from "../../assets/vault-svgrepo-com.svg";
 
 function Title() {
   return (
-    <div className="title">
+    <div data-testid="title" className="title">
       <div className="titleimg">
         <img src={logo} alt="logo" />
       </div>

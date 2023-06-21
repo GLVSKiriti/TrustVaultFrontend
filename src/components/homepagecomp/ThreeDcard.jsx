@@ -14,7 +14,7 @@ function ThreeDcard() {
   }
 
   return (
-    <div className={cardclass}>
+    <div data-testid="ThreeDcard" className={cardclass}>
       <Login flip={flipper} />
       <SignUp flip={flipper} />
     </div>

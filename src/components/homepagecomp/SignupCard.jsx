@@ -36,7 +36,7 @@ function SignUp(props) {
   };
 
   return (
-    <div className="signup-box">
+    <div data-testid="signup" className="signup-box">
       <h1>SignUp</h1>
       <form action="" className="signup-form">
         <div>
@@ -101,6 +101,7 @@ function SignUp(props) {
       <h2 className="flipbuttlog">
         Already have an account?
         <span
+          data-testid="cardrTest2"
           className="cardr"
           onClick={() => {
             console.log("clicked from signupcard");

@@ -73,3 +73,14 @@ test("Login Button should be enabled when inputs exist", () => {
 
   expect(loginButton).toBeEnabled();
 });
+
+test("flipper function is called when clicked on signUp", () => {
+  const mockFlipper = jest.fn();
+
+  render(<Login flip={mockFlipper} />);
+  const signUpText = screen.getByTestId("cardrTest");
+
+  fireEvent.click(signUpText);
+
+  expect(mockFlipper).toHaveBeenCalled();
+});
