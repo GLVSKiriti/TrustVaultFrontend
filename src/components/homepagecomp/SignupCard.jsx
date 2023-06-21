@@ -93,6 +93,7 @@ function SignUp(props) {
             event.preventDefault();
             signupAPI();
           }}
+          disabled={!username || !email || !password || !repass}
         >
           SignUp
         </button>

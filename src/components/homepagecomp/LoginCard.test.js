@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Login from "./Logincard";
 import "@testing-library/jest-dom";
 
@@ -24,10 +24,12 @@ test("Email,Password,Login Button should be rendered", () => {
   const emailInput = screen.getByPlaceholderText(/Enter Email/i);
   const passwordInput = screen.getByPlaceholderText(/Enter Password/i);
   const loginButton = screen.getByRole("button");
+  const otherElements = screen.getAllByRole("heading");
 
   expect(emailInput).toBeInTheDocument();
   expect(passwordInput).toBeInTheDocument();
   expect(loginButton).toBeInTheDocument();
+  expect(otherElements).toHaveLength(3);
 });
 
 test("Email and password input should be empty initially", () => {
