@@ -5,7 +5,7 @@ import Profileicon from "./Profileicon";
 
 function Header() {
   return (
-    <div className="header">
+    <div data-testid="header" className="header">
       <Title />
       <Profileicon />
       <div className="design">

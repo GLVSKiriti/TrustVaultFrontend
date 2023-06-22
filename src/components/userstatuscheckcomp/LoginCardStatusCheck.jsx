@@ -15,7 +15,7 @@ function LoginCardStatusCheck() {
       password: password,
     });
 
-    console.log(res.data.error);
+    // console.log(res.data.error);
     if (res.data.error) {
       setError(res.data.error);
     } else {
@@ -24,10 +24,22 @@ function LoginCardStatusCheck() {
   };
 
   return (
-    <div className="otpcard">
+    <div data-testid="logCardStatusCheck" className="otpcard">
       <h2 className="otpcardheading">Status Check With Login</h2>
-      {isError !== "" ? <p className="error">{isError}</p> : <></>}
-      {message !== "" ? <p className="message">{message}</p> : <></>}
+      {isError !== "" ? (
+        <p data-testid="afterClick" className="error">
+          {isError}
+        </p>
+      ) : (
+        <></>
+      )}
+      {message !== "" ? (
+        <p data-testid="afterClick" className="message">
+          {message}
+        </p>
+      ) : (
+        <></>
+      )}
 
       <input
         name="email"
@@ -51,6 +63,8 @@ function LoginCardStatusCheck() {
           event.preventDefault();
           statusCheck();
         }}
+        disabled={!email || !password}
+        style={!email || !password ? { cursor: "not-allowed" } : {}}
       >
         Check Status
       </button>
