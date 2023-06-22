@@ -33,10 +33,10 @@ function Vaultcard(props) {
     );
     setDispRes(res.data);
     // console.log(dispRes1);
-    if (dispRes1 !== {}) {
-      navigate("/displayVault");
-    }
   };
+  if (Object.keys(dispRes1).length !== 0) {
+    navigate("/displayVault");
+  }
 
   if (props.ind % 3 === 1) {
     vnamecalss = "vaultname one";
@@ -49,11 +49,13 @@ function Vaultcard(props) {
   return (
     <div className="holder">
       <div
+        data-testid="vaultcard2"
         className="vaultcard2"
         onMouseOver={() => setClicked(true)}
         onMouseLeave={() => setClicked(false)}
       >
         <div
+          data-testid="vaultcard"
           className="vaultcard"
           onClick={() => {
             displayVaultfunc();
@@ -62,6 +64,7 @@ function Vaultcard(props) {
           <img src={vaultlogo} alt="" />
         </div>
         <span
+          data-testid="vaultname"
           className={vnamecalss}
           onClick={() => {
             displayVaultfunc();

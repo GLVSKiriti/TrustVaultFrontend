@@ -25,6 +25,7 @@ function DropDownItem(props) {
 
   return (
     <div
+      data-testid="dropDownItem"
       className="item"
       onMouseOver={() => {
         if (props.content === "Nominees") {
@@ -48,9 +49,17 @@ function DropDownItem(props) {
         <div className="nominees">
           {nominee.map((each, index) => {
             if (index + 1 === nominee.length) {
-              return <div key={index}>{each.n_name}</div>;
+              return (
+                <div data-testid="nominee" key={index}>
+                  {each.n_name}
+                </div>
+              );
             }
-            return <div key={index}>{each.n_name + ","}</div>;
+            return (
+              <div data-testid="nominee" key={index}>
+                {each.n_name + ","}
+              </div>
+            );
           })}
         </div>
       ) : (
