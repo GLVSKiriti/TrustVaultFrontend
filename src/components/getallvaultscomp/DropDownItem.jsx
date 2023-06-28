@@ -1,27 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 function DropDownItem(props) {
   const [ishover, setHover] = useState(false);
   const nominee = props.n_name;
-
-  const deleteVault = async () => {
-    const password = prompt("Enter password");
-    const token = sessionStorage.getItem("jwt");
-    const res = await axios.delete(
-      `http://localhost:4000/vault/deleteVault/${props.v_id}`,
-      {
-        headers: {
-          Authorization: token,
-        },
-        data: {
-          password: password,
-        },
-      }
-    );
-
-    console.log(res.data.message);
-  };
 
   return (
     <div
@@ -39,7 +20,8 @@ function DropDownItem(props) {
       }}
       onClick={() => {
         if (props.content === "Delete") {
-          deleteVault();
+          props.setTargetVId(props.v_id);
+          props.setClick("Delete");
         }
       }}
     >

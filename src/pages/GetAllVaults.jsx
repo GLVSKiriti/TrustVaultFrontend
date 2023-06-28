@@ -5,10 +5,12 @@ import Vaultcard from "../components/getallvaultscomp/Vaultcard";
 import "./GetAllVaults.css";
 import addbutton from "../assets/plus.png";
 import { useNavigate } from "react-router-dom";
+import PopUp from "../components/getallvaultscomp/PopUp";
 
 function GetAllVaults() {
   const [vaults, setVaults] = useState([]);
-  // const [isClick, setClick] = useState(true);
+  const [isClick, setClick] = useState("");
+  const [targetVId, setTargetVId] = useState();
   const navigate = useNavigate();
 
   const fetchmyapi = async () => {
@@ -26,7 +28,6 @@ function GetAllVaults() {
     fetchmyapi();
   }, []);
 
-  //   const filterdata = res.data.filterData;
   return (
     <div>
       <div className="page3">
@@ -40,6 +41,8 @@ function GetAllVaults() {
                 content={each.v_name}
                 nomineenames={each.n_name}
                 v_id={each.v_id}
+                setClick={setClick}
+                setTargetVId={setTargetVId}
               />
             );
           })}
@@ -53,24 +56,11 @@ function GetAllVaults() {
           </div>
         </div>
       </div>
-      {/* {isClick && (
-        <div className="deletepopup">
-          <div className="content">
-            <h1>Enter Password</h1>
-            <input
-              type="password"
-              className="deletepassword"
-              placeholder="Enter Login Password"
-            />
-            <div className="buttons">
-              <button className="delete">Delete</button>
-              <button className="cancel">Cancel</button>
-            </div>
-            <div className="circle1"></div>
-            <div className="circle2"></div>
-          </div>
-        </div>
-      )} */}
+      {isClick !== "" ? (
+        <PopUp type={isClick} setClick={setClick} v_id={targetVId} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

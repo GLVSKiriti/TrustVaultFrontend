@@ -289,6 +289,11 @@
   color: white;
 }
 
+.display:hover {
+  background-color: green;
+  color: white;
+}
+
 .cancel:hover {
   background-color: black;
   color: white;

@@ -3,40 +3,10 @@ import vaultlogo from "../../assets/vault.png";
 import usernamelogo from "../../assets/username.png";
 import deletelogo from "../../assets/icons8-delete.svg";
 import DropDownItem from "./DropDownItem";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import DisResContext from "../displayvaultcomp/DisResContext";
-import { useContext } from "react";
 
 function Vaultcard(props) {
-  const [isclicked, setClicked] = useState(false);
+  const [ishovered, setHovered] = useState(false);
   let vnamecalss = "vaultname";
-  const navigate = useNavigate();
-
-  const { dispRes1, setDispRes } = useContext(DisResContext);
-
-  const displayVaultfunc = async () => {
-    const token = sessionStorage.getItem("jwt");
-    const vsk = prompt("Enter the Vault Secret Key");
-    const res = await axios.post(
-      "http://localhost:4000/vault/displayVault",
-      {
-        vId: props.v_id,
-        vaultSecretKey: vsk,
-      },
-      {
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    setDispRes(res.data);
-    // console.log(dispRes1);
-  };
-  if (Object.keys(dispRes1).length !== 0) {
-    navigate("/displayVault");
-  }
 
   if (props.ind % 3 === 1) {
     vnamecalss = "vaultname one";
@@ -51,14 +21,15 @@ function Vaultcard(props) {
       <div
         data-testid="vaultcard2"
         className="vaultcard2"
-        onMouseOver={() => setClicked(true)}
-        onMouseLeave={() => setClicked(false)}
+        onMouseOver={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
         <div
           data-testid="vaultcard"
           className="vaultcard"
           onClick={() => {
-            displayVaultfunc();
+            props.setClick("Display");
+            props.setTargetVId(props.v_id);
           }}
         >
           <img src={vaultlogo} alt="" />
@@ -67,12 +38,13 @@ function Vaultcard(props) {
           data-testid="vaultname"
           className={vnamecalss}
           onClick={() => {
-            displayVaultfunc();
+            props.setClick("Display");
+            props.setTargetVId(props.v_id);
           }}
         >
           {props.content}
         </span>
-        {isclicked ? (
+        {ishovered ? (
           <div className="dropdownmenu">
             <ul>
               <DropDownItem
@@ -86,6 +58,8 @@ function Vaultcard(props) {
                 image={deletelogo}
                 content="Delete"
                 v_id={props.v_id}
+                setClick={props.setClick}
+                setTargetVId={props.setTargetVId}
               />
             </ul>
           </div>
