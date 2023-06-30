@@ -76,9 +76,12 @@ function PopUp(props) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div style={{ color: "red" }}>{error}</div>
+        <div data-testid="errorDiv" style={{ color: "red" }}>
+          {error}
+        </div>
         <div className="buttons">
           <button
+            data-testid="funcButton"
             className={props.type === "Delete" ? "delete" : "display"}
             onClick={() =>
               props.type === "Delete" ? deleteVault() : displayVaultfunc()
@@ -87,7 +90,11 @@ function PopUp(props) {
           >
             {props.type}
           </button>
-          <button className="cancel" onClick={() => props.setClick("")}>
+          <button
+            data-testid="cancelButton"
+            className="cancel"
+            onClick={() => props.setClick("")}
+          >
             Cancel
           </button>
         </div>
