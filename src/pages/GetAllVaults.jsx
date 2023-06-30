@@ -47,6 +47,7 @@ function GetAllVaults() {
             );
           })}
           <div
+            data-testId="addVault"
             className="vaultcard add"
             onClick={() => {
               navigate("/addVault");
