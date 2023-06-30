@@ -94,6 +94,11 @@ function SignUp(props) {
             signupAPI();
           }}
           disabled={!username || !email || !password || !repass}
+          style={
+            !username || !email || !password || !repass
+              ? { cursor: "not-allowed" }
+              : { cursor: "pointer" }
+          }
         >
           SignUp
         </button>

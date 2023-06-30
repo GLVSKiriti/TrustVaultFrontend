@@ -57,6 +57,11 @@ function Login(props) {
             loginfunc();
           }}
           disabled={!email || !password}
+          style={
+            !email || !password
+              ? { cursor: "not-allowed" }
+              : { cursor: "pointer" }
+          }
         >
           Login
         </button>

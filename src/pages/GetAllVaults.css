@@ -280,8 +280,15 @@
   font-weight: 700;
   border-radius: 15px;
   padding: 5px;
+  margin-right: 10px;
   cursor: pointer;
   box-shadow: 1px 2px 3px black;
+}
+.buttons > button:disabled {
+  background-color: buttonface;
+  color: buttontext;
+  border-color: black;
+  cursor: not-allowed;
 }
 
 .delete:hover {

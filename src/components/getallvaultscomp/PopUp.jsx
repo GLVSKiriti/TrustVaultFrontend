@@ -83,6 +83,7 @@ function PopUp(props) {
             onClick={() =>
               props.type === "Delete" ? deleteVault() : displayVaultfunc()
             }
+            disabled={!password}
           >
             {props.type}
           </button>

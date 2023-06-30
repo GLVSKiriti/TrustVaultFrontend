@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import DropDownItem from "./DropDownItem";
 import "@testing-library/jest-dom";
-import axios from "axios";
 
 jest.mock("axios");
 
@@ -30,32 +29,25 @@ describe("DropDownItem", () => {
     expect(screen.queryAllByTestId("nominee")).toHaveLength(0);
   });
 
-  test("should call deleteVault function onClick if content is delete", () => {
+  test("should set the isClick and targetVid values onClick if content is delete", () => {
     const deletelogo = "deletelogo";
-    sessionStorage.setItem("jwt", "mockToken");
+    const setClickMock = jest.fn();
+    const setTargetVIdMock = jest.fn();
+    render(
+      <DropDownItem
+        image={deletelogo}
+        content="Delete"
+        v_id="12"
+        setClick={setClickMock}
+        setTargetVId={setTargetVIdMock}
+      />
+    );
 
-    const promptMock = jest.spyOn(window, "prompt");
-    promptMock.mockReturnValueOnce("password");
-
-    axios.delete.mockResolvedValueOnce({
-      data: { message: "Deleted successfully" },
-    });
-
-    render(<DropDownItem image={deletelogo} content="Delete" v_id="12" />);
     const container = screen.getByTestId("dropDownItem");
 
     fireEvent.click(container);
 
-    expect(axios.delete).toBeCalledWith(
-      `http://localhost:4000/vault/deleteVault/12`,
-      {
-        headers: {
-          Authorization: "mockToken",
-        },
-        data: {
-          password: "password",
-        },
-      }
-    );
+    expect(setTargetVIdMock).toHaveBeenCalledWith("12");
+    expect(setClickMock).toHaveBeenCalledWith("Delete");
   });
 });
