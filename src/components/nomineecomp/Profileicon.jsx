@@ -8,6 +8,7 @@ function Profileicon() {
 
   return (
     <div
+      data-testid="profile"
       className="profile"
       onMouseOver={() => {
         setHover(true);
