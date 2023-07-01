@@ -21,7 +21,7 @@ function GetAllVaults() {
       },
     });
     setVaults(res.data.filterData);
-    console.log(res.data.filterData);
+    // console.log(res.data.filterData);
   };
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function GetAllVaults() {
             );
           })}
           <div
-            data-testId="addVault"
+            data-testid="addVault"
             className="vaultcard add"
             onClick={() => {
               navigate("/addVault");

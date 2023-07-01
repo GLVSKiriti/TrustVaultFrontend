@@ -13,7 +13,13 @@ function AddVault() {
   const [data, setdata] = useState("");
   const [vsk, setvsk] = useState("");
   const [desc, setdesc] = useState("");
-
+  const disability =
+    nomDetails.filter((each) => !each.n_email || !each.n_name || !each.n_ph_no)
+      .length ||
+    !v_name ||
+    !data ||
+    !vsk ||
+    !desc;
   const navigate = useNavigate();
 
   function deletenominee(index) {
@@ -66,6 +72,7 @@ function AddVault() {
             onClick={() => {
               addVaultAPI();
             }}
+            disabled={disability}
           >
             Add Vault
           </button>
@@ -94,7 +101,7 @@ function AddVault() {
           <textarea
             type="text"
             placeholder="Enter Your Data Here"
-            contentEditable
+            // contentEditable
             value={data}
             onChange={(event) => {
               setdata(event.target.value);
@@ -102,10 +109,10 @@ function AddVault() {
           ></textarea>
         </div>
         <h2 className="nomdetailsheading">Nominee Details</h2>
-        <div className>
+        <div>
           {nomDetails.map((each, index) => {
             return (
-              <div className="nomineedetails">
+              <div key={index} className="nomineedetails">
                 <h2>Nominee {index + 1}</h2>
                 <input
                   className="nom"

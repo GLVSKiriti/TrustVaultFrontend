@@ -41,6 +41,10 @@
   cursor: pointer;
 }
 
+.addva:disabled {
+  cursor: not-allowed;
+}
+
 .cancelva {
   height: 3em;
   font-size: larger;
