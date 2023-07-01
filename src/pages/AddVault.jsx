@@ -41,7 +41,7 @@ function AddVault() {
 
   const addVaultAPI = async () => {
     const token = sessionStorage.getItem("jwt");
-    console.log(token);
+    // console.log(token);
     const res = await axios.post(
       "http://localhost:4000/vault/addVault",
       {
@@ -112,7 +112,11 @@ function AddVault() {
         <div>
           {nomDetails.map((each, index) => {
             return (
-              <div key={index} className="nomineedetails">
+              <div
+                key={index}
+                data-testid="nomineedetails"
+                className="nomineedetails"
+              >
                 <h2>Nominee {index + 1}</h2>
                 <input
                   className="nom"
@@ -142,6 +146,7 @@ function AddVault() {
                   }}
                 />
                 <img
+                  data-testid="deleteNominee"
                   onClick={() => {
                     deletenominee(index);
                   }}
