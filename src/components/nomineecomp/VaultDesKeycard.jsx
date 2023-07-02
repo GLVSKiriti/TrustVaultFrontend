@@ -25,7 +25,7 @@ function VaultDesKeyCard(props) {
   };
 
   return !isclicked ? (
-    <div className="otpcard">
+    <div data-testid="v_data_for_nom_page" className="otpcard">
       <h2 className="otpcardheading">Enter The SecretKey</h2>
       <h3>{props.description}</h3>
       <input
@@ -43,6 +43,7 @@ function VaultDesKeyCard(props) {
           event.preventDefault();
           getVaultData();
         }}
+        disabled={!vaultSecretKey}
       >
         Submit
       </button>
@@ -50,7 +51,7 @@ function VaultDesKeyCard(props) {
       <div className="circle2"></div>
     </div>
   ) : (
-    <div className="datacard">
+    <div data-testid="v_data_for_nom_page" className="datacard">
       <div className="upper">
         <h1 className="datacardheading">Vault Data From The User</h1>
         <div className="circle1new"></div>

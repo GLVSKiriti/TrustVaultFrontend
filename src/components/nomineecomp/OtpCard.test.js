@@ -126,6 +126,11 @@ describe("OtpCard Component", () => {
         },
       }
     );
+    await waitFor(() => {
+      expect(mockedNavigate).toBeCalledWith(`/nominee/vault?v_id=2`, {
+        state: "Hello , Guys",
+      });
+    });
   });
 
   test("Verify Otp function is called onClick Verify OTP button with wrong OTP", async () => {
