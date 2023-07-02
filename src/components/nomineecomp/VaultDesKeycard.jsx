@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function VaultDesKeyCard(props) {
   const [vaultSecretKey, SetVaultSecretKey] = useState("");
   const [isclicked, setisclicked] = useState(false);
   const [reso, setreso] = useState("");
+  const [isError, setIsError] = useState("");
 
   const getVaultData = async () => {
-    const res = await axios.post("http://localhost:4000/nominee/vaultData", {
-      vault_secret_key: vaultSecretKey,
-      v_id: props.v_id,
-    });
+    try {
+      const res = await axios.post("http://localhost:4000/nominee/vaultData", {
+        vault_secret_key: vaultSecretKey,
+        v_id: props.v_id,
+      });
 
-    setreso(res.data.vault_data);
-    console.log(res.data);
-    setisclicked(true);
+      setreso(res.data.vault_data);
+      console.log(res.data);
+      setisclicked(true);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setIsError(error.response.data.error);
+      }
+    }
   };
 
   return !isclicked ? (
@@ -30,6 +36,7 @@ function VaultDesKeyCard(props) {
         value={vaultSecretKey}
         onChange={(e) => SetVaultSecretKey(e.target.value)}
       />
+      {isError !== "" ? <div style={{ color: "red" }}>{isError}</div> : <></>}
       <button
         className="sendotp"
         onClick={(event) => {

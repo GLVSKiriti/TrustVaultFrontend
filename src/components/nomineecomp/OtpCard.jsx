@@ -19,25 +19,27 @@ function OtpCard() {
         email: email,
       });
       const { token, message } = res.data;
-      console.log(token);
+      // console.log(token);
       if (token) {
         sessionStorage.setItem("jwt", token);
+        setError("");
+        setMessage(message);
+        setClicked(true);
+        setEmail("");
       } else {
         setError("Something Went Wrong!!Try again later");
       }
-      setMessage(message);
-      setClicked(true);
-      setEmail("");
-      setError("");
     } catch (error) {
-      setError(error.message);
+      if (error.response && error.response.status === 401) {
+        setError(error.response.data.error);
+      }
     }
   };
 
   const verifyOtp = async () => {
     try {
-      console.log(otp);
-      console.log(v_id);
+      // console.log(otp);
+      // console.log(v_id);
       const token = sessionStorage.getItem("jwt");
       const res = await axios.post(
         "http://localhost:4000/nominee/otpverify",
@@ -59,59 +61,40 @@ function OtpCard() {
       navigate(`/nominee/vault?v_id=${v_id}`, { state: description });
       setOtp("");
     } catch (error) {
-      setError(error);
+      if (error.response && error.response.status === 401) {
+        setMessage("");
+        setError(error.response.data.error);
+      }
     }
   };
   return (
     <div className="otpcard">
-      {error !== "" && <div className="error">{error}</div>}
       <h2 className="otpcardheading">
         {!clicked ? "Verify Your Mail" : "Verify Your OTP"}
       </h2>
-      {/* <form className="otpcardform"> */}
-      {!clicked ? (
-        <input
-          name="email"
-          type="email"
-          placeholder="Enter Email"
-          className="otpemail"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      ) : (
-        <input
-          name="otp"
-          type="text"
-          placeholder="Enter OTP"
-          className="otpemail"
-          value={otp}
-          onChange={(event) => setOtp(event.target.value)}
-        />
-      )}
-
-      {!clicked ? (
-        <button
-          className="sendotp"
-          onClick={(event) => {
-            event.preventDefault();
-            verifyEmail();
-          }}
-        >
-          Send OTP
-        </button>
-      ) : (
-        <button
-          className="sendotp"
-          onClick={(event) => {
-            event.preventDefault();
-            verifyOtp();
-          }}
-        >
-          Verify OTP
-        </button>
-      )}
-      {/* </form> */}
-      <div>{message}</div>
+      <input
+        role="input"
+        name={!clicked ? "email" : "otp"}
+        type={!clicked ? "email" : "text"}
+        placeholder={!clicked ? "Enter Email" : "Enter OTP"}
+        className="otpemail"
+        value={!clicked ? email : otp}
+        onChange={(event) =>
+          !clicked ? setEmail(event.target.value) : setOtp(event.target.value)
+        }
+      />
+      {error !== "" && <div className="error2">{error}</div>}
+      {message !== "" && <div style={{ color: "green" }}>{message}</div>}
+      <button
+        className="sendotp"
+        onClick={(event) => {
+          event.preventDefault();
+          !clicked ? verifyEmail() : verifyOtp();
+        }}
+        disabled={!clicked ? !email : !otp}
+      >
+        {!clicked ? "Send OTP" : "Verify OTP"}
+      </button>
       <div className="circle1"></div>
       <div className="circle2"></div>
     </div>

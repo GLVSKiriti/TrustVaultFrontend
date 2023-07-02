@@ -129,6 +129,10 @@ body {
   cursor: pointer;
 }
 
+.sendotp:disabled {
+  cursor: not-allowed;
+}
+
 .circle1 {
   border-radius: 50%;
   background-color: aquamarine;
@@ -149,8 +153,8 @@ body {
   bottom: -92px;
 }
 
-.error {
+.error2 {
   font-family: "McLaren", cursive;
-  font-size: larger;
+  font-size: medium;
   color: red;
 }
