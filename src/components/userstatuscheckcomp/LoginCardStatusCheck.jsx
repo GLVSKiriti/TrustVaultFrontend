@@ -10,16 +10,14 @@ function LoginCardStatusCheck() {
   const statusCheck = async () => {
     setError("");
     setMessage("");
-    const res = await axios.post("http://localhost:4000/cron/statusCheck", {
-      email: email,
-      password: password,
-    });
-
-    // console.log(res.data.error);
-    if (res.data.error) {
-      setError(res.data.error);
-    } else {
+    try {
+      const res = await axios.post("http://localhost:4000/cron/statusCheck", {
+        email: email,
+        password: password,
+      });
       setMessage(res.data.message);
+    } catch (error) {
+      if (error.response) setError(error.response.data.error);
     }
   };
 
