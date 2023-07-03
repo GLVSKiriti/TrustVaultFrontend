@@ -7,58 +7,21 @@ import { useContext } from "react";
 import axios from "axios";
 
 function DisplayVault() {
-  // const [dispRes, fetchedvault] = useState({
-  //   v_id: "1",
-  //   v_name: "test1v1update2",
-  //   data: "This is a secured application 12@569.#$ update2",
-  //   description: "test1key1update",
-  //   nominee: [
-  //     {
-  //       v_id: 1,
-  //       n_email: "utest1n1@gmail.com",
-  //       n_name: "utestn1",
-  //       n_ph_no: "1234567891",
-  //     },
-  //     {
-  //       v_id: 1,
-  //       n_email: "utest1n2@gmail.com",
-  //       n_name: "utestn2",
-  //       n_ph_no: "1234567891",
-  //     },
-  //     {
-  //       v_id: 1,
-  //       n_email: "utest1n3@gmail.com",
-  //       n_name: "utestn3",
-  //       n_ph_no: "1234567891",
-  //     },
-  //     {
-  //       v_id: 1,
-  //       n_email: "utest1n4@gmail.com",
-  //       n_name: "utestn4",
-  //       n_ph_no: "1234567891",
-  //     },
-  //   ],
-  // });
-
   const { dispRes1, fetchedvaultorg } = useContext(DisResContext);
-  const [dispRes, fetchedvault] = useState(dispRes1);
+  // Now dispRes is a copy of dispRes1 not reference
+  const [dispRes, fetchedvault] = useState(
+    JSON.parse(JSON.stringify(dispRes1))
+  );
   const [updatecheck, setUpdateCheck] = useState(false);
-  // const [vsk, setvsk] = useState("");
-  console.log(dispRes1);
-  console.log(dispRes);
+
   function setvname(val, name) {
     fetchedvault({ ...dispRes, [name]: val });
   }
 
   function addnominee() {
-    console.log(dispRes);
-    console.log("lllllllllll");
-    console.log(dispRes1);
     let nomDetails = dispRes.nominee;
     nomDetails.push({ n_name: "", n_email: "", n_ph_no: "" });
     fetchedvault({ ...dispRes, nominee: nomDetails });
-    console.log(dispRes1);
-    console.log(dispRes);
   }
 
   function deletenominee(index) {
@@ -75,7 +38,7 @@ function DisplayVault() {
   function handleNomineeChangeDetails(event, index, tag) {
     let nomDetails = dispRes.nominee;
     const update = event.target.value;
-    const list = [...nomDetails];
+    let list = [...nomDetails];
     list[index][tag] = update;
     fetchedvault({ ...dispRes, nominee: list });
   }
@@ -83,8 +46,8 @@ function DisplayVault() {
   const fetchupdatevaultapi = async () => {
     const token = sessionStorage.getItem("jwt");
     const res = await axios.put(
-      `http://localhost:4000/vault/updateVault/${dispRes1.v_id}`,
-      dispRes1,
+      `http://localhost:4000/vault/updateVault/${dispRes.v_id}`,
+      dispRes,
       {
         headers: {
           Authorization: token,
@@ -94,6 +57,16 @@ function DisplayVault() {
     );
     console.log(res.data.message);
   };
+
+  let nomDisability = dispRes.nominee.filter(
+    (nom) => !nom.n_name || !nom.n_email || !nom.n_ph_no
+  ).length;
+  const diability =
+    !dispRes.vaultSecretKey ||
+    !dispRes.v_name ||
+    !dispRes.data ||
+    !dispRes.description ||
+    nomDisability;
 
   return (
     <div className="page4">
@@ -113,10 +86,11 @@ function DisplayVault() {
             <button
               className="addva"
               onClick={() => {
-                fetchedvaultorg(dispRes);
                 fetchupdatevaultapi();
+                fetchedvaultorg(JSON.parse(JSON.stringify(dispRes)));
                 setUpdateCheck(false);
               }}
+              disabled={diability}
             >
               Save Changes
             </button>
@@ -125,9 +99,7 @@ function DisplayVault() {
             <button
               className="cancelva"
               onClick={() => {
-                // navigate("/getAllVaults");
-                console.log(dispRes1.nominee);
-                fetchedvault(dispRes1);
+                fetchedvault(JSON.parse(JSON.stringify(dispRes1)));
                 setUpdateCheck(false);
               }}
             >
@@ -138,11 +110,7 @@ function DisplayVault() {
         <div className="sec vname">
           <h2>Vault Name</h2>
           {!updatecheck ? (
-            <input
-              type="text"
-              placeholder="Enter Vault Name"
-              value={dispRes1.v_name}
-            />
+            <input data-testid="vName" value={dispRes1.v_name} readOnly />
           ) : (
             <input
               type="text"
@@ -157,17 +125,11 @@ function DisplayVault() {
         <div className="sec data">
           <h2>Data</h2>
           {!updatecheck ? (
-            <textarea
-              type="text"
-              placeholder="Enter Your Data Here"
-              // contentEditable
-              value={dispRes1.data}
-            ></textarea>
+            <textarea value={dispRes1.data} readOnly></textarea>
           ) : (
             <textarea
               type="text"
               placeholder="Enter Your Data Here"
-              contentEditable
               value={dispRes.data}
               onChange={(event) => {
                 setvname(event.target.value, "data");
@@ -177,38 +139,38 @@ function DisplayVault() {
         </div>
         <h2 className="nomdetailsheading">Nominee Details</h2>
         {!updatecheck ? (
-          <div className>
+          <div>
             {dispRes1.nominee.map((each, index) => {
               return (
-                <div className="nomineedetails">
+                <div key={index} className="nomineedetails">
                   <h2>Nominee {index + 1}</h2>
                   <input
+                    data-testid="nName"
                     className="nom"
-                    type="text"
-                    placeholder="Enter Name"
                     value={each.n_name}
+                    readOnly
                   />
                   <input
+                    data-testid="nEmail"
                     className="nom"
-                    type="email"
-                    placeholder="Enter Mail"
                     value={each.n_email}
+                    readOnly
                   />
                   <input
+                    data-testid="nPhNo"
                     className="nom"
-                    type="text"
-                    placeholder="Enter Number"
                     value={each.n_ph_no}
+                    readOnly
                   />
                 </div>
               );
             })}
           </div>
         ) : (
-          <div className>
+          <div>
             {dispRes.nominee.map((each, index) => {
               return (
-                <div className="nomineedetails">
+                <div key={index} className="nomineedetails">
                   <h2>Nominee {index + 1}</h2>
                   <input
                     className="nom"
@@ -238,6 +200,7 @@ function DisplayVault() {
                     }}
                   />
                   <img
+                    data-testid="delete"
                     onClick={() => {
                       deletenominee(index);
                     }}
@@ -272,11 +235,7 @@ function DisplayVault() {
         {!updatecheck ? (
           <div className="sec desc">
             <h2>Description</h2>
-            <textarea
-              type="text"
-              placeholder="Describe about the Vault Secret Key so that nominee can guess it by reading this description"
-              value={dispRes1.description}
-            ></textarea>
+            <textarea value={dispRes1.description} readOnly></textarea>
           </div>
         ) : (
           <div className="sec desc">

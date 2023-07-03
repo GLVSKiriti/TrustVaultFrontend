@@ -227,3 +227,18 @@ body {
 .flipbuttlog {
   font-size: 20px;
 }
+
+.AuthError {
+  color: red;
+  font-size: large;
+  font-weight: bold;
+  align-self: center;
+  margin-top: 15px;
+}
+
+.AuthError2 {
+  color: red;
+  font-size: large;
+  font-weight: bold;
+  align-self: center;
+}

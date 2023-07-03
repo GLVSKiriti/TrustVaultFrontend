@@ -7,20 +7,22 @@ import { useNavigate } from "react-router-dom";
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isError, setIsError] = useState("");
   const navigate = useNavigate();
 
   const loginfunc = async () => {
-    const res = await axios.post("http://localhost:4000/auth/signin", {
-      email: email,
-      password: password,
-    });
-
-    const { message, token } = res.data;
-    if (token) {
+    try {
+      const res = await axios.post("http://localhost:4000/auth/signin", {
+        email: email,
+        password: password,
+      });
+      const { message, token } = res.data;
       sessionStorage.setItem("jwt", token);
       navigate("/getAllVaults");
-    } else {
-      alert("Sign In Again");
+    } catch (error) {
+      if (error.response) {
+        setIsError(error.response.data.error);
+      }
     }
   };
 
@@ -50,6 +52,7 @@ function Login(props) {
             onChange={(event) => setPassword(event.target.value)}
           />
         </div>
+        {isError && <div className="AuthError">{isError}</div>}
         <button
           className="login-inp"
           onClick={(event) => {

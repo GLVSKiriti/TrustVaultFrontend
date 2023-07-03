@@ -10,28 +10,27 @@ function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repass, setRepass] = useState("");
+  const [isError, setIsError] = useState("");
   const navigate = useNavigate();
 
   const signupAPI = async () => {
-    if (password === repass) {
-      const res = await axios.post("http://localhost:4000/auth/signup", {
-        username: username,
-        email: email,
-        password: password,
-      });
-      if (res.data.error) {
-        alert("User Already exists");
-      } else {
+    try {
+      if (password === repass) {
+        const res = await axios.post("http://localhost:4000/auth/signup", {
+          username: username,
+          email: email,
+          password: password,
+        });
         const { message, token } = res.data;
-        if (token) {
-          sessionStorage.setItem("jwt", token);
-          navigate("/getAllVaults");
-        } else {
-          alert("Sign Up Again");
-        }
+        sessionStorage.setItem("jwt", token);
+        navigate("/getAllVaults");
+      } else {
+        alert("Password Mismatched");
       }
-    } else {
-      alert("Password Mismatched");
+    } catch (error) {
+      if (error.response) {
+        setIsError(error.response.data.error);
+      }
     }
   };
 
@@ -87,6 +86,7 @@ function SignUp(props) {
             }}
           />
         </div>
+        {isError && <div className="AuthError2">{isError}</div>}
         <button
           className="signup-inp"
           onClick={(event) => {
