@@ -11,10 +11,13 @@ function LoginCardStatusCheck() {
     setError("");
     setMessage("");
     try {
-      const res = await axios.post("http://localhost:4000/cron/statusCheck", {
-        email: email,
-        password: password,
-      });
+      const res = await axios.post(
+        "https://trustvault-api.vercel.app/cron/statusCheck",
+        {
+          email: email,
+          password: password,
+        }
+      );
       setMessage(res.data.message);
     } catch (error) {
       if (error.response) setError(error.response.data.error);

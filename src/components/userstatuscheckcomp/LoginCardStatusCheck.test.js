@@ -78,7 +78,7 @@ describe("LoginCardStatusCheck", () => {
     fireEvent.click(logButton);
 
     expect(axios.post).toBeCalledWith(
-      "http://localhost:4000/cron/statusCheck",
+      "https://trustvault-api.vercel.app/cron/statusCheck",
       {
         email: "test",
         password: "test",

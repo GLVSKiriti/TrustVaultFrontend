@@ -49,7 +49,7 @@ describe("vaultDesKeycard component", () => {
     fireEvent.click(submitButton);
 
     expect(axios.post).toBeCalledWith(
-      "http://localhost:4000/nominee/vaultData",
+      "https://trustvault-api.vercel.app/nominee/vaultData",
       {
         vault_secret_key: "vsk",
         v_id: 1,
@@ -78,7 +78,7 @@ describe("vaultDesKeycard component", () => {
     fireEvent.click(submitButton);
 
     expect(axios.post).toBeCalledWith(
-      "http://localhost:4000/nominee/vaultData",
+      "https://trustvault-api.vercel.app/nominee/vaultData",
       {
         vault_secret_key: "vsk",
         v_id: 1,

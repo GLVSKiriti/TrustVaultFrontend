@@ -13,7 +13,7 @@ function PopUp(props) {
   const displayVaultfunc = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:4000/vault/displayVault",
+        "https://trustvault-api.vercel.app/vault/displayVault",
         {
           vId: props.v_id,
           vaultSecretKey: password,
@@ -39,7 +39,7 @@ function PopUp(props) {
   const deleteVault = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:4000/vault/deleteVault/${props.v_id}`,
+        `https://trustvault-api.vercel.app/vault/deleteVault/${props.v_id}`,
         {
           headers: {
             Authorization: token,

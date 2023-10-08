@@ -44,9 +44,12 @@ describe("OtpCard Component", () => {
     fireEvent.change(inputElement, { target: { value: testValue } });
     fireEvent.click(buttonElement);
 
-    expect(axios.post).toBeCalledWith("http://localhost:4000/nominee/email", {
-      email: "test@gmail.com",
-    });
+    expect(axios.post).toBeCalledWith(
+      "https://trustvault-api.vercel.app/nominee/email",
+      {
+        email: "test@gmail.com",
+      }
+    );
     await waitFor(() => {
       expect(screen.getByText("OTP sent successfully")).toBeInTheDocument();
     });
@@ -77,9 +80,12 @@ describe("OtpCard Component", () => {
     fireEvent.change(inputElement, { target: { value: testValue } });
     fireEvent.click(buttonElement);
 
-    expect(axios.post).toBeCalledWith("http://localhost:4000/nominee/email", {
-      email: "test",
-    });
+    expect(axios.post).toBeCalledWith(
+      "https://trustvault-api.vercel.app/nominee/email",
+      {
+        email: "test",
+      }
+    );
     await waitFor(() => {
       expect(screen.getByText("Enter a valid email")).toBeInTheDocument();
     });
@@ -114,7 +120,7 @@ describe("OtpCard Component", () => {
     fireEvent.click(buttonElement);
 
     expect(axios.post).toBeCalledWith(
-      "http://localhost:4000/nominee/otpverify",
+      "https://trustvault-api.vercel.app/nominee/otpverify",
       {
         otp: "123456",
         v_id: "2",
@@ -167,7 +173,7 @@ describe("OtpCard Component", () => {
     fireEvent.click(buttonElement);
 
     expect(axios.post).toBeCalledWith(
-      "http://localhost:4000/nominee/otpverify",
+      "https://trustvault-api.vercel.app/nominee/otpverify",
       {
         otp: "123456",
         v_id: "2",

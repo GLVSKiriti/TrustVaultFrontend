@@ -9,10 +9,13 @@ function VaultDesKeyCard(props) {
 
   const getVaultData = async () => {
     try {
-      const res = await axios.post("http://localhost:4000/nominee/vaultData", {
-        vault_secret_key: vaultSecretKey,
-        v_id: props.v_id,
-      });
+      const res = await axios.post(
+        "https://trustvault-api.vercel.app/nominee/vaultData",
+        {
+          vault_secret_key: vaultSecretKey,
+          v_id: props.v_id,
+        }
+      );
 
       setreso(res.data.vault_data);
       console.log(res.data);

@@ -15,9 +15,12 @@ function OtpCard() {
   const verifyEmail = async () => {
     // console.log(email);
     try {
-      const res = await axios.post("http://localhost:4000/nominee/email", {
-        email: email,
-      });
+      const res = await axios.post(
+        "https://trustvault-api.vercel.app/nominee/email",
+        {
+          email: email,
+        }
+      );
       const { token, message } = res.data;
       // console.log(token);
       if (token) {
@@ -42,7 +45,7 @@ function OtpCard() {
       // console.log(v_id);
       const token = sessionStorage.getItem("jwt");
       const res = await axios.post(
-        "http://localhost:4000/nominee/otpverify",
+        "https://trustvault-api.vercel.app/nominee/otpverify",
         {
           otp: otp,
           v_id: v_id,

@@ -91,7 +91,7 @@ describe("Popup", () => {
     fireEvent.click(funcButton);
 
     expect(axios.delete).toBeCalledWith(
-      `http://localhost:4000/vault/deleteVault/1`,
+      `https://trustvault-api.vercel.app/vault/deleteVault/1`,
       {
         headers: {
           Authorization: "token",
@@ -125,7 +125,7 @@ describe("Popup", () => {
     fireEvent.click(funcButton);
 
     expect(axios.post).toBeCalledWith(
-      "http://localhost:4000/vault/displayVault",
+      "https://trustvault-api.vercel.app/vault/displayVault",
       {
         vId: "1",
         vaultSecretKey: "test",
@@ -160,7 +160,7 @@ describe("Popup", () => {
     fireEvent.click(funcButton);
 
     expect(axios.delete).toBeCalledWith(
-      `http://localhost:4000/vault/deleteVault/1`,
+      `https://trustvault-api.vercel.app/vault/deleteVault/1`,
       {
         headers: {
           Authorization: "token",

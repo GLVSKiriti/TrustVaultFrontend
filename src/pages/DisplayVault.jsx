@@ -46,7 +46,7 @@ function DisplayVault() {
   const fetchupdatevaultapi = async () => {
     const token = sessionStorage.getItem("jwt");
     const res = await axios.put(
-      `http://localhost:4000/vault/updateVault/${dispRes.v_id}`,
+      `https://trustvault-api.vercel.app/vault/updateVault/${dispRes.v_id}`,
       dispRes,
       {
         headers: {

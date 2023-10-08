@@ -96,7 +96,7 @@ describe("AddVault Page", () => {
     fireEvent.click(addVaultButton);
 
     expect(axios.post).toHaveBeenCalledWith(
-      "http://localhost:4000/vault/addVault",
+      "https://trustvault-api.vercel.app/vault/addVault",
       {
         v_name: "test",
         data: "test",

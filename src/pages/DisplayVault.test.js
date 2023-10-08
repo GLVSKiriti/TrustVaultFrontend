@@ -144,7 +144,7 @@ describe("DisplayVault Page", () => {
     fireEvent.click(screen.getByText("Save Changes"));
     await waitFor(() => {
       expect(axios.put).toBeCalledWith(
-        `http://localhost:4000/vault/updateVault/1`,
+        `https://trustvault-api.vercel.app/vault/updateVault/1`,
         dispRes1New,
         {
           headers: {

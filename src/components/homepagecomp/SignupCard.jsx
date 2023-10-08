@@ -16,11 +16,14 @@ function SignUp(props) {
   const signupAPI = async () => {
     try {
       if (password === repass) {
-        const res = await axios.post("http://localhost:4000/auth/signup", {
-          username: username,
-          email: email,
-          password: password,
-        });
+        const res = await axios.post(
+          "https://trustvault-api.vercel.app/auth/signup",
+          {
+            username: username,
+            email: email,
+            password: password,
+          }
+        );
         const { message, token } = res.data;
         sessionStorage.setItem("jwt", token);
         navigate("/getAllVaults");

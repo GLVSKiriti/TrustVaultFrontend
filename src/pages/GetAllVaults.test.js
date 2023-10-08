@@ -33,7 +33,7 @@ describe("GetAllVaults", () => {
     render(<GetAllVaults />);
     //use effect calls axios.get on every render
     expect(axios.get).toBeCalledWith(
-      "http://localhost:4000/vault/getAllVaults",
+      "https://trustvault-api.vercel.app/vault/getAllVaults",
       {
         headers: {
           Authorization: "token",

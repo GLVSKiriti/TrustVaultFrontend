@@ -12,10 +12,13 @@ function Login(props) {
 
   const loginfunc = async () => {
     try {
-      const res = await axios.post("http://localhost:4000/auth/signin", {
-        email: email,
-        password: password,
-      });
+      const res = await axios.post(
+        "https://trustvault-api.vercel.app/auth/signin",
+        {
+          email: email,
+          password: password,
+        }
+      );
       const { message, token } = res.data;
       sessionStorage.setItem("jwt", token);
       navigate("/getAllVaults");

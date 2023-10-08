@@ -15,11 +15,14 @@ function GetAllVaults() {
 
   const fetchmyapi = async () => {
     const token = sessionStorage.getItem("jwt");
-    const res = await axios.get("http://localhost:4000/vault/getAllVaults", {
-      headers: {
-        Authorization: token,
-      },
-    });
+    const res = await axios.get(
+      "https://trustvault-api.vercel.app/vault/getAllVaults",
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
     setVaults(res.data.filterData);
     // console.log(res.data.filterData);
   };

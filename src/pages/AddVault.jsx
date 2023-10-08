@@ -43,7 +43,7 @@ function AddVault() {
     const token = sessionStorage.getItem("jwt");
     // console.log(token);
     const res = await axios.post(
-      "http://localhost:4000/vault/addVault",
+      "https://trustvault-api.vercel.app/vault/addVault",
       {
         v_name: v_name,
         data: data,
