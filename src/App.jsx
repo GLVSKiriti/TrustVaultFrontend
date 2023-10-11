@@ -27,7 +27,7 @@ function App() {
         theme="light"
       />
       {/* Same as */}
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <Routes>
         <Route path="/" element={<HomeApp />} />
         <Route path="/user/statuscheck" element={<UserStatusCheck />} />
