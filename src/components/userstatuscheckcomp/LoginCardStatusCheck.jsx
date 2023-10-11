@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 function LoginCardStatusCheck() {
   const [email, setEmail] = useState("");
@@ -19,8 +20,12 @@ function LoginCardStatusCheck() {
         }
       );
       setMessage(res.data.message);
+      toast(res.data.message);
     } catch (error) {
-      if (error.response) setError(error.response.data.error);
+      if (error.response) {
+        toast(error.response.data.error);
+        setError(error.response.data.error);
+      }
     }
   };
 

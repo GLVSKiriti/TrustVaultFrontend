@@ -4,6 +4,7 @@ import passwordlogo from "../../assets/password.png";
 import usernamelogo from "../../assets/username.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 function SignUp(props) {
   const [username, setusername] = useState("");
@@ -25,13 +26,16 @@ function SignUp(props) {
           }
         );
         const { message, token } = res.data;
+        toast("Successfully signed up!")
         sessionStorage.setItem("jwt", token);
         navigate("/getAllVaults");
       } else {
-        alert("Password Mismatched");
+        // alert("Password Mismatched");
+        toast("Password Mismatched")
       }
     } catch (error) {
       if (error.response) {
+        toast(error.response)
         setIsError(error.response.data.error);
       }
     }

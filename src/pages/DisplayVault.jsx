@@ -5,6 +5,7 @@ import Header from "../components/nomineecomp/Header";
 import DisResContext from "../components/displayvaultcomp/DisResContext";
 import { useContext } from "react";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 function DisplayVault() {
   const { dispRes1, fetchedvaultorg } = useContext(DisResContext);
@@ -27,7 +28,8 @@ function DisplayVault() {
   function deletenominee(index) {
     let nomDetails = dispRes.nominee;
     if (nomDetails.length === 1) {
-      alert("Atleast One Nominee is required for a vault");
+      // alert("Atleast One Nominee is required for a vault");
+      toast("Atleast One Nominee is required for a vault");
     } else {
       const list = [...nomDetails];
       list.splice(index, 1);
@@ -56,6 +58,7 @@ function DisplayVault() {
       }
     );
     console.log(res.data.message);
+    toast(res.data.message);
   };
 
   let nomDisability = dispRes.nominee.filter(

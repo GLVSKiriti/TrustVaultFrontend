@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 function OtpCard() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -25,6 +26,7 @@ function OtpCard() {
       // console.log(token);
       if (token) {
         sessionStorage.setItem("jwt", token);
+        toast("Your email has been verified!");
         setError("");
         setMessage(message);
         setClicked(true);
@@ -34,6 +36,7 @@ function OtpCard() {
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
+        toast(error.response.data.error);
         setError(error.response.data.error);
       }
     }
@@ -60,12 +63,14 @@ function OtpCard() {
 
       const { message, description } = res.data;
       setMessage(message);
+      toast(message);
       console.log(description);
       navigate(`/nominee/vault?v_id=${v_id}`, { state: description });
       setOtp("");
     } catch (error) {
       if (error.response && error.response.status === 401) {
         setMessage("");
+        toast(error.response.data.error);
         setError(error.response.data.error);
       }
     }
