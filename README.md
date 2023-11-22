@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/{{REPOSITORY}}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{REPOSITORY}})
+[![codecov](https://codecov.io/gh/GLVSKiriti/TrustVaultFrontend/graph/badge.svg?token=4MKJFLRVZA)](https://codecov.io/gh/GLVSKiriti/TrustVaultFrontend)
 
 # TrustVault
 
