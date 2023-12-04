@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 function VaultDesKeyCard(props) {
   const [vaultSecretKey, SetVaultSecretKey] = useState("");
@@ -22,6 +23,7 @@ function VaultDesKeyCard(props) {
       setisclicked(true);
     } catch (error) {
       if (error.response && error.response.status === 401) {
+        toast(error.response.data.error)
         setIsError(error.response.data.error);
       }
     }

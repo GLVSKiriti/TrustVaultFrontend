@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DisResContext from "../displayvaultcomp/DisResContext";
+import { toast } from 'react-toastify';
 
 function PopUp(props) {
   const [password, setPassword] = useState("");
@@ -31,6 +32,7 @@ function PopUp(props) {
     } catch (error) {
       if (error.response && error.response.status === 401) {
         console.log(error.response.data.error);
+        toast(error.response.data.error)
         setError(error.response.data.error);
       }
     }

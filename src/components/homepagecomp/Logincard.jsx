@@ -3,6 +3,7 @@ import emaillogo from "../../assets/email.png";
 import passwordlogo from "../../assets/password.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 function Login(props) {
   const [email, setEmail] = useState("");
@@ -20,10 +21,12 @@ function Login(props) {
         }
       );
       const { message, token } = res.data;
+      toast("You're now logged in!")
       sessionStorage.setItem("jwt", token);
       navigate("/getAllVaults");
     } catch (error) {
       if (error.response) {
+        toast(error.response)
         setIsError(error.response.data.error);
       }
     }

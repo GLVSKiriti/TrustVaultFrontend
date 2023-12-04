@@ -4,6 +4,7 @@ import Header from "../components/nomineecomp/Header";
 import deletelogo from "../assets/icons8-delete.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 function AddVault() {
   const [nomDetails, setnomDetails] = useState([
@@ -24,7 +25,8 @@ function AddVault() {
 
   function deletenominee(index) {
     if (nomDetails.length === 1) {
-      alert("Atleast One Nominee is required for a vault");
+      toast("Atleast One Nominee is required for a vault");
+      // alert("Atleast One Nominee is required for a vault");
     } else {
       const list = [...nomDetails];
       list.splice(index, 1);
@@ -58,7 +60,8 @@ function AddVault() {
         },
       }
     );
-    alert(res.data.message);
+    // alert(res.data.message);
+    toast(res.data.message);
     navigate("/getAllVaults");
   };
 
